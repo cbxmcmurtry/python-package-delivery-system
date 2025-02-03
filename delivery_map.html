@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>
+        L_NO_TOUCH = false;
+        L_DISABLE_3D = false;
+    </script>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        #map {position: relative; width: 100%; height: 100%;}
+        .leaflet-container { font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="folium-map" id="map"></div>
+</body>
+<script>
+    var map = L.map("map", {
+        center: [40.7608, -111.891],
+        crs: L.CRS.EPSG3857,
+        zoom: 13,
+        zoomControl: true,
+        preferCanvas: false,
+    });
+
+    var tile_layer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
+        detectRetina: false,
+        maxNativeZoom: 19,
+        maxZoom: 19,
+        minZoom: 0,
+        noWrap: false,
+        opacity: 1,
+        subdomains: "abc",
+        tms: false
+    }).addTo(map);
+
+    var packageData = [
+        {id: 1, address: "195 W Oakland Ave, Salt Lake City, UT"},
+        {id: 2, address: "2530 S 500 E, Salt Lake City, UT"},
+        {id: 3, address: "233 Canyon Rd, Salt Lake City, UT"},
+        {id: 4, address: "380 W 2880 S, Salt Lake City, UT"},
+        {id: 5, address: "410 S State St, Salt Lake City, UT"},
+        {id: 6, address: "3060 Lester St, Salt Lake City, UT"},
+        {id: 7, address: "1330 2100 S, Salt Lake City, UT"},
+        {id: 8, address: "300 State St, Salt Lake City, UT"},
+        {id: 9, address: "600 E 900 South, Salt Lake City, UT"},
+        {id: 10, address: "2600 Taylorsville Blvd, Taylorsville, UT"},
+        {id: 11, address: "3575 W Valley Central Station bus Loop, West Valley City, UT"},
+        {id: 12, address: "2010 W 500 S, Salt Lake City, UT"},
+        {id: 13, address: "4300 S 1300 E, Salt Lake City, UT"},
+        {id: 14, address: "4580 S 2300 E, Holladay, UT"},
+        {id: 15, address: "3148 S 1100 W, Salt Lake City, UT"},
+        {id: 16, address: "1488 4800 S, Salt Lake City, UT"},
+        {id: 17, address: "177 W Price Ave, Salt Lake City, UT"},
+        {id: 18, address: "3595 Main St, Salt Lake City, UT"},
+        {id: 19, address: "6351 South 900 East, Murray, UT"},
+        {id: 20, address: "5100 South 2700 West, Salt Lake City, UT"},
+        {id: 21, address: "5025 State St, Murray, UT"},
+        {id: 22, address: "5383 South 900 East #104, Murray, UT"},
+        {id: 23, address: "1060 Dalton Ave S, Salt Lake City, UT"},
+        {id: 24, address: "2835 Main St, Salt Lake City, UT"},
+        {id: 25, address: "1330 2100 S, Salt Lake City, UT"},
+        {id: 26, address: "300 State St, Salt Lake City, UT"},
+        {id: 27, address: "3365 S 900 W, Salt Lake City, UT"},
+        {id: 28, address: "2300 Parkway Blvd, West Valley City, UT"},
+        {id: 29, address: "410 S State St, Salt Lake City, UT"},
+        {id: 30, address: "5383 South 900 East #104, Murray, UT"},
+        {id: 31, address: "1060 Dalton Ave S, Salt Lake City, UT"},
+        {id: 32, address: "2835 Main St, Salt Lake City, UT"},
+        {id: 33, address: "1330 2100 S, Salt Lake City, UT"},
+        {id: 34, address: "300 State St, Salt Lake City, UT"},
+        {id: 35, address: "410 S State St, Salt Lake City, UT"},
+        {id: 36, address: "233 Canyon Rd, Salt Lake City, UT"},
+        {id: 37, address: "600 E 900 South, Salt Lake City, UT"},
+        {id: 38, address: "1488 4800 S, Salt Lake City, UT"},
+        {id: 39, address: "3148 S 1100 W, Salt Lake City, UT"},
+        {id: 40, address: "177 W Price Ave, Salt Lake City, UT"}
+    ];
+
+    packageData.forEach(function(package) {
+        var apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(package.address)}&key=fa48827b4e014ce992b69e8cfe52808e`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.results.length > 0) {
+                    var lat = data.results[0].geometry.lat;
+                    var lon = data.results[0].geometry.lng;
+
+                    var marker = L.marker([lat, lon])
+                        .bindPopup(`<b>Package #${package.id}</b><br>${package.address}`);
+                    marker.addTo(map);
+                } else {
+                    console.error(`No results found for: ${package.address}`);
+                }
+            })
+            .catch(error => console.error('Error fetching data from OpenCage API:', error));
+    });
+</script>
+</html>
