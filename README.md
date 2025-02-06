@@ -1,11 +1,11 @@
 # Package Delivery System
 ## Overview
-The Package Delivery System is a Python-based application designed to simulate and manage package deliveries using multiple trucks. The system optimizes delivery routes, tracks package statuses, and visualizes delivery locations on an interactive map. This project demonstrates a variety of programming concepts, including data structures, GUI development, API integration, and geolocation mapping.
+The Package Delivery System is a Python-based application designed to simulate and manage package deliveries using multiple trucks from an **Object-Oriented Programming** approach. The system optimizes real-world delivery routes, tracks package statuses, and visualizes delivery locations on an interactive map using the **Nearest Neighbor Algorithm**. This project demonstrates a variety of programming concepts, including data structures, GUI development, API integration, and geolocation mapping.
 
 ### Features
 * **Package Tracking:** Allows users to view the status and details of each package, including its location, delivery time, and assigned truck.
 * **Route Optimization:** Utilizes distance calculations to find the most efficient route for each truck to minimize travel time and mileage.
-* **Geolocation Mapping:** Integrates the OpenCage Geocoding API to fetch coordinates for addresses and displays them on an interactive map using Leaflet and Folium.
+* **Geolocation Mapping:** Integrates the **OpenCage Geocoding API** to fetch coordinates for addresses and displays them on an interactive map using Leaflet and Folium.
 * **GUI Interface:** Built using Tkinter, the graphical interface provides an intuitive way for users to look up packages, filter by status, and see map visualizations.
 
 ### Technologies Used
